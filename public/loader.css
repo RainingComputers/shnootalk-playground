@@ -1,0 +1,57 @@
+/* Loader */
+
+.loader {
+  border-radius: 50%;
+  -webkit-animation: spin 0.6s linear infinite; /* Safari */
+  animation: spin 0.6s linear infinite;
+}
+
+.loader-background-1e {
+  border: 8px solid #1e1e1e;
+}
+
+.loader-background-25 {
+  border: 8px solid #252526;
+}
+
+.loader-background-2d {
+  border: 8px solid #2d2d2d;
+}
+
+.loader-background-33 {
+  border: 8px solid #333333;
+}
+
+.loader-background-3c {
+  border: 8px solid #3c3c3c;
+}
+
+.loader-foreground-f80 {
+  border-top:8px solid  #ffffff80;
+}
+
+.loader-foreground-cc {
+  border-top:8px solid  #cccccc;
+}
+
+.loader-foreground-white {
+  border-top:8px solid  #ffffff;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
