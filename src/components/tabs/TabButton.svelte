@@ -25,7 +25,6 @@
     export let expandHeight: boolean = false
     export let minWidth: number = 120
     export let onClose: (tabName: string) => void | undefined = undefined
-
     export let tabName: string
 
     const ctx: TabsContext = getContext(TABS)

@@ -1,11 +1,12 @@
 import TabsContext from "../tabs/tabsContext"
+import { Writable, writable } from "svelte/store"
 
 class TabbedEditorContext {
-    tabsList: string[]
+    tabsList: Writable<string[]>
     tabsContext: TabsContext
 
     constructor(initialTabs: string[]) {
-        this.tabsList = initialTabs
+        this.tabsList = writable(initialTabs)
         this.tabsContext = new TabsContext()
     }
 }

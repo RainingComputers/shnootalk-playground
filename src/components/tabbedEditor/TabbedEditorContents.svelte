@@ -4,12 +4,13 @@
     import type TabbedEditorContext from "./tabbedEditorContext"
 
     export let fontSize: number = 17
-
     export let ctx: TabbedEditorContext
+
+    const tabsList = ctx.tabsList
 </script>
 
 <Tabs ctx={ctx.tabsContext}>
-    {#each ctx.tabsList as tabName}
+    {#each $tabsList as tabName}
         <EditorTabContent {tabName} {fontSize} />
     {/each}
 </Tabs>

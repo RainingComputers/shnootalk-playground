@@ -8,7 +8,7 @@
 <button
     class="box-button background-25 box-items-center"
     class:box-height-full={expandHeight}
-    onclick={onClick}
+    on:click={onClick}
 >
     <img
         src={icon}

@@ -3,16 +3,16 @@
     import { TABS } from "./Tabs.svelte"
     import type TabsContext from "./tabsContext"
 
+    const dispatch = createEventDispatcher()
+
     export let tabName: string
     export let expand: boolean = true
 
     const ctx: TabsContext = getContext(TABS)
     const currentTab = ctx.currentTab
 
-    const onAppearDispatch = createEventDispatcher()
-
     afterUpdate(() => {
-        if ($currentTab === tabName) onAppearDispatch("appear")
+        if ($currentTab === tabName) dispatch("appear")
     })
 </script>
 

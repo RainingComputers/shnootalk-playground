@@ -6,9 +6,9 @@ import Editor from "../Editor.svelte";
     export let tabName: string
     export let fontSize: number
 
-    let editorComponent: any
+    let editor: Editor
 </script>
 
-<TabContent {tabName} on:appear={() => editorComponent.focus()}>
-    <Editor {fontSize} editorId={tabName} bind:this={editorComponent} />
+<TabContent {tabName} on:appear={() => editor.focus()}>
+    <Editor {fontSize} editorId={tabName} bind:this={editor} />
 </TabContent>
