@@ -1,8 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
-
     import IconButton from "../IconButton.svelte"
-
     import TabButton from "../tabs/TabButton.svelte"
     import Tabs from "../tabs/Tabs.svelte"
     import type TabbedEditorContext from "./tabbedEditorContext"

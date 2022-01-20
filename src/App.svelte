@@ -2,7 +2,6 @@
     import Toolbar from "./components/Toolbar.svelte"
     import RunButton from "./components/RunButton.svelte"
     import PlaygroundLogo from "./appComponents/PlaygroundLogo.svelte"
-
     import TabbedEditorContext from "./components/tabbedEditor/tabbedEditorContext"
     import TabbedEditorButtons from "./components/tabbedEditor/TabbedEditorButtons.svelte"
     import TabbedEditorContent from "./components/tabbedEditor/TabbedEditorContents.svelte"

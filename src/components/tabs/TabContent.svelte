@@ -3,11 +3,10 @@
     import { TABS } from "./Tabs.svelte"
     import type TabsContext from "./tabsContext"
 
-    const dispatch = createEventDispatcher()
-
     export let tabName: string
     export let expand: boolean = true
 
+    const dispatch = createEventDispatcher()
     const ctx: TabsContext = getContext(TABS)
     const currentTab = ctx.currentTab
 
