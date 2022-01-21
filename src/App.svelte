@@ -8,9 +8,11 @@
     import Expand from "./components/Expand.svelte"
     import Modal from "./components/Modal.svelte"
     import TextInput from "./components/TextInput.svelte"
+    import About from "./appComponents/About.svelte"
 
     const tabbedEditorContext = new TabsContext(["main.shtk", "two.shtk"])
     let newTabModal: Modal
+    let aboutModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
     let tabbedEditrorContents: TabbedEditorContents
     let newTabTextInput: TextInput
@@ -29,6 +31,7 @@
     function onKeyDown(event: KeyboardEvent) {
         if (event.key !== "Escape") return
         newTabModal.closeModal()
+        aboutModal.closeModal()
         newTabTextInput.clear()
         tabbedEditrorContents.focus()
         event.preventDefault()
@@ -52,6 +55,16 @@
         />
     </Modal>
 
+    <Modal
+        width={25}
+        bind:this={aboutModal}
+        onClose={() => {
+            tabbedEditrorContents.focus()
+        }}
+    >
+        <About />
+    </Modal>
+
     <Toolbar height={46}>
         <TabbedEditorButtons
             ctx={tabbedEditorContext}
@@ -60,9 +73,10 @@
             on:newTab={openNewTabModal}
         />
         <Expand />
-        <PlaygroundLogo />
+        <PlaygroundLogo onClick={() => aboutModal.openModal()} />
         <RunButton expandHeight onClick={() => console.log("Run")} />
     </Toolbar>
+
     <TabbedEditorContents
         ctx={tabbedEditorContext}
         fontSize={17}
