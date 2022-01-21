@@ -1,5 +1,6 @@
 <script lang="ts">
     export let width: number
+    export let onClose: () => void = undefined
 
     let showModal = false
 
@@ -9,6 +10,7 @@
 
     export function closeModal() {
         showModal = false
+        onClose()
     }
 </script>
 

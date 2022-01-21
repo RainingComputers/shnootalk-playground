@@ -8,7 +8,12 @@
     export let ctx: TabsContext
 
     const tabsList = ctx.tabsList
+    const currentTab = ctx.currentTab
     const editors: { [key: string]: Editor } = {}
+
+    export function focus() {
+        editors[$currentTab].focus()
+    }
 </script>
 
 <Tabs {ctx}>

@@ -4,7 +4,7 @@
     import PlaygroundLogo from "./appComponents/PlaygroundLogo.svelte"
     import TabsContext from "./components/tabs/tabsContext"
     import TabbedEditorButtons from "./components/tabbedEditor/TabbedEditorButtons.svelte"
-    import TabbedEditorContent from "./components/tabbedEditor/TabbedEditorContents.svelte"
+    import TabbedEditorContents from "./components/tabbedEditor/TabbedEditorContents.svelte"
     import Expand from "./components/Expand.svelte"
     import Modal from "./components/Modal.svelte"
     import TextInput from "./components/TextInput.svelte"
@@ -12,6 +12,7 @@
     const tabbedEditorContext = new TabsContext(["main.shtk", "two.shtk"])
     let newTabModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
+    let tabbedEditrorContents: TabbedEditorContents
     let newTabTextInput: TextInput
 
     function openNewTabModal() {
@@ -22,11 +23,18 @@
     function closeNewTabModalAndCreateTab(value: string) {
         newTabModal.closeModal()
         tabbedEditorButtons.addTab(value)
+        tabbedEditrorContents.focus()
     }
 </script>
 
 <main class="box-root">
-    <Modal width={25} bind:this={newTabModal}>
+    <Modal
+        width={25}
+        bind:this={newTabModal}
+        onClose={() => {
+            tabbedEditrorContents.focus()
+        }}
+    >
         <TextInput
             label="Enter name"
             bind:this={newTabTextInput}
@@ -45,5 +53,9 @@
         <PlaygroundLogo />
         <RunButton expandHeight onClick={() => console.log("Run")} />
     </Toolbar>
-    <TabbedEditorContent ctx={tabbedEditorContext} fontSize={17} />
+    <TabbedEditorContents
+        ctx={tabbedEditorContext}
+        fontSize={17}
+        bind:this={tabbedEditrorContents}
+    />
 </main>
