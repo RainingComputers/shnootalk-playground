@@ -47,7 +47,6 @@ input[type="text"] {
 }
 
 textarea:focus {
-    border: 2px solid #ff1a1a;
     outline: none;
 }
 
@@ -63,13 +62,13 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 16px;
 }
 
 .box {
     display: flex;
     flex-direction: column;
     margin: 0 0 0 0;
-    font-size: 16px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -334,8 +333,8 @@ textarea:focus {
     color: #ffffff;
 }
 
-.hover-background-darken:hover:not(.active) {
-    background: rgba(0, 0, 0, 0.2);
+.hover-background:hover:not(.active) {
+    background: rgba(50, 50, 50, 50);
 }
 
 /* Scrollbar */

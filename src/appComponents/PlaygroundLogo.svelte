@@ -8,7 +8,7 @@
         "background-25",
         "foreground-cc",
         "cursor-pointer",
-        "hover-background-darken",
+        "hover-background",
     ].join(" ")
 </script>
 

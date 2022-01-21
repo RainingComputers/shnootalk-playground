@@ -31,3 +31,9 @@
         on:keydown={onKeyDown}
     />
 </span>
+
+<style>
+    input:focus {
+        border: 0.5px solid #ff1a1a;
+    }
+</style>

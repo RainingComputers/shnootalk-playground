@@ -12,7 +12,7 @@
 >
     <img
         src={icon}
-        class="box-rounded hover-background-darken pad-vert-small pad-hor-small"
+        class="box-rounded hover-background pad-vert-small pad-hor-small"
         width="{iconWidth}px"
         alt=""
     />

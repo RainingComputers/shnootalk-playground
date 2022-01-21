@@ -63,7 +63,7 @@
         <span class="box-child-float-right pad-left" />
         <img
             src="icons/x.svg"
-            class="box-rounded hover-background-darken"
+            class="box-rounded hover-background"
             width="{tabIconWidth}px"
             alt=""
             on:click={() => {
