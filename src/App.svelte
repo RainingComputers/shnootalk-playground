@@ -29,12 +29,17 @@
     }
 
     function onKeyDown(event: KeyboardEvent) {
-        if (event.key !== "Escape") return
-        newTabModal.closeModal()
-        aboutModal.closeModal()
-        newTabTextInput.clear()
-        tabbedEditrorContents.focus()
-        event.preventDefault()
+        if (event.key === "Escape") {
+            newTabModal.closeModal()
+            aboutModal.closeModal()
+            newTabTextInput.clear()
+            tabbedEditrorContents.focus()
+            event.preventDefault()
+        }
+
+        if (event.ctrlKey) {
+            openNewTabModal()
+        }
     }
 </script>
 
