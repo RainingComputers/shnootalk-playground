@@ -6,7 +6,6 @@
     import Tabs from "../tabs/Tabs.svelte"
     import type TabsContext from "../tabs/tabsContext"
 
-    export let expandHeight: boolean
     export let ctx: TabsContext
 
     const dispatch = createEventDispatcher()
@@ -18,16 +17,18 @@
 </script>
 
 <Tabs {ctx}>
-    <HorizontalScrollable {expandHeight}>
-        <TabButton tabName={$tabsList[0]} {expandHeight} tabIcon="icons/code.svg" />
-        {#each $tabsList.slice(1) as tabName}
-            <TabButton
-                {tabName}
-                {expandHeight}
-                tabIcon="icons/code.svg"
-                onClose={() => ctx.closeTab(tabName)}
-            />
-        {/each}
+    <HorizontalScrollable>
+        <div class="box box-arrange-hor box-height-full">
+            <TabButton tabName={$tabsList[0]} tabIcon="icons/code.svg" />
+            {#each $tabsList.slice(1) as tabName}
+                <TabButton
+                    {tabName}
+                
+                    tabIcon="icons/code.svg"
+                    onClose={() => ctx.closeTab(tabName)}
+                />
+            {/each}
+        </div>
     </HorizontalScrollable>
 
     <IconButton icon="icons/plus.svg" onClick={() => dispatch("newTab")} />

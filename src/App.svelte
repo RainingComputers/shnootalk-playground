@@ -72,13 +72,12 @@
     <Toolbar height={46}>
         <TabbedEditorButtons
             ctx={tabbedEditorContext}
-            expandHeight
             bind:this={tabbedEditorButtons}
             on:newTab={openNewTabModal}
         />
         <Expand />
         <PlaygroundLogo onClick={() => aboutModal.openModal()} />
-        <RunButton expandHeight onClick={() => console.log("Run")} />
+        <RunButton onClick={() => console.log("Run")} />
     </Toolbar>
 
     <TabbedEditorContents

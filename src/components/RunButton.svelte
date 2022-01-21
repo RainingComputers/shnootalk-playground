@@ -14,15 +14,13 @@
 <script lang="ts">
     export let onClick: any
     export let disabled: boolean = false
-    export let expandHeight: boolean = false
-    export let expendWidth: boolean = false
+    export let expandWidth: boolean = false
     export let iconWidth: number = 15
 </script>
 
 <button
     class={buttonClass}
-    class:box-height-full={expandHeight}
-    class:box-width-full={expendWidth}
+    class:box-width-full={expandWidth}
     on:click={onClick}
     {disabled}
 >

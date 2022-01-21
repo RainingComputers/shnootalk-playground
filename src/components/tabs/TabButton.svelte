@@ -11,6 +11,7 @@
         "background-2d",
         "foreground-f80",
         "active-foreground-cc",
+        "box-height-full",
     ].join(" ")
 </script>
 
@@ -22,7 +23,6 @@
 
     export let tabIcon: string | undefined = undefined
     export let tabIconWidth: number = 15
-    export let expandHeight: boolean = false
     export let minWidth: number = 120
     export let onClose: (tabName: string) => void | undefined = undefined
     export let tabName: string
@@ -41,7 +41,6 @@
 
 <button
     class={tabButtonClass}
-    class:box-height-full={expandHeight}
     class:active={$currentTab == tabName}
     style="min-width: {minWidth}px;"
     on:click|preventDefault={() => {
