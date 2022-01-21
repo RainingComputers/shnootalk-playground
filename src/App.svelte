@@ -25,7 +25,17 @@
         tabbedEditorButtons.addTab(value)
         tabbedEditrorContents.focus()
     }
+
+    function onKeyDown(event: KeyboardEvent) {
+        if (event.key !== "Escape") return
+        newTabModal.closeModal()
+        newTabTextInput.clear()
+        tabbedEditrorContents.focus()
+        event.preventDefault()
+    }
 </script>
+
+<svelte:window on:keydown={onKeyDown} />
 
 <main class="box-root">
     <Modal
@@ -38,7 +48,7 @@
         <TextInput
             label="Enter name"
             bind:this={newTabTextInput}
-            onChangeCallback={closeNewTabModalAndCreateTab}
+            onEnterCallback={closeNewTabModalAndCreateTab}
         />
     </Modal>
 

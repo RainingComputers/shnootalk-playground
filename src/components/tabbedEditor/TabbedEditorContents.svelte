@@ -12,7 +12,7 @@
     const editors: { [key: string]: Editor } = {}
 
     export function focus() {
-        editors[$currentTab].focus()
+        if (editors[$currentTab]) editors[$currentTab].focus()
     }
 </script>
 

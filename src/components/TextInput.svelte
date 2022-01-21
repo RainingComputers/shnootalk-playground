@@ -2,18 +2,23 @@
     import { tick } from "svelte"
 
     export let label: string
-    export let onChangeCallback: (value: string) => void
+    export let onEnterCallback: (value: string) => void
 
-    let inputEl: HTMLElement
+    let inputEl: HTMLInputElement
 
-    function onChange(event: any) {
-        onChangeCallback(event.target.value)
+    function onKeyDown(event: any) {
+        if (event.key !== "Enter" || event.target.value.length === 0) return
+        onEnterCallback(event.target.value)
         event.target.value = ""
     }
 
     export async function focus() {
         await tick()
         inputEl.focus()
+    }
+
+    export function clear() {
+        inputEl.value = ""
     }
 </script>
 
@@ -23,6 +28,6 @@
         class="background-1e box-width-full foreground-cc"
         type="text"
         bind:this={inputEl}
-        on:change={onChange}
+        on:keydown={onKeyDown}
     />
 </span>
