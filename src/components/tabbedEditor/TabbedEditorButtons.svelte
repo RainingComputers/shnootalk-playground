@@ -11,10 +11,6 @@
     const dispatch = createEventDispatcher()
     const tabsList = ctx.tabsList
 
-    function closeTab(tabName: string) {
-        ctx.closeTab(tabName)
-    }
-
     export function addTab(tabName: string) {
         ctx.addTab(tabName)
     }
@@ -27,7 +23,7 @@
             {tabName}
             {expandHeight}
             tabIcon="icons/code.svg"
-            onClose={() => closeTab(tabName)}
+            onClose={() => ctx.closeTab(tabName)}
         />
     {/each}
     <IconButton icon="icons/plus.svg" onClick={() => dispatch("newTab")} />
