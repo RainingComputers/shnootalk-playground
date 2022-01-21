@@ -33,20 +33,21 @@ img {
     vertical-align: middle;
 }
 
-span {
-    font: inherit;
+span, input {
+    font: inherit !important;
+    font-size: inherit !important;
 }
 
 textarea,
 input[type="text"] {
     border: none;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     resize: none;
 }
 
 textarea:focus {
-    border: none;
+    border: 2px solid #ff1a1a;
     outline: none;
 }
 
@@ -68,7 +69,13 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     margin: 0 0 0 0;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+    .box span {
+        font-size: 14px;
+    }
 }
 
 .box-button {
