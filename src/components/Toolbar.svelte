@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-    export let height: number
+    export let height: number = 48
 </script>
 
 <div class={toolbarClass} style="height: {height}px;">

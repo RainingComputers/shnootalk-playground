@@ -69,7 +69,7 @@
         <About />
     </Modal>
 
-    <Toolbar height={46}>
+    <Toolbar>
         <TabbedEditorButtons
             ctx={tabbedEditorContext}
             bind:this={tabbedEditorButtons}
