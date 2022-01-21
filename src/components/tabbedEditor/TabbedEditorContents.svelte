@@ -11,7 +11,7 @@
     const currentTab = ctx.currentTab
     const editors: { [key: string]: Editor } = {}
 
-    export async function focus() {
+    export function focus() {
         if (editors[$currentTab]) editors[$currentTab].focus()
     }
 </script>

@@ -25,7 +25,6 @@
     function closeNewTabModalAndCreateTab(value: string) {
         newTabModal.closeModal()
         tabbedEditorButtons.addTab(value)
-        tabbedEditrorContents.focus()
     }
 
     function onKeyDown(event: KeyboardEvent) {

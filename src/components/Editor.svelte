@@ -23,7 +23,9 @@
     })
 
     export function focus() {
-        editor.focus()
+        // set timeout so the editor does not capture key events like the enter key
+        // there is no other way to do this
+        setTimeout(() => editor.focus(), 1)
     }
 </script>
 
