@@ -19,7 +19,11 @@
 <Tabs {ctx}>
     {#each $tabsList as tabName}
         <TabContent {tabName} on:appear={focus}>
-            <Editor {fontSize} editorId={tabName} bind:this={editors[tabName]} />
+            <Editor
+                {fontSize}
+                editorId={tabName}
+                bind:this={editors[tabName]}
+            />
         </TabContent>
     {/each}
 </Tabs>

@@ -23,7 +23,6 @@
             {#each $tabsList.slice(1) as tabName}
                 <TabButton
                     {tabName}
-                
                     tabIcon="icons/code.svg"
                     onClose={() => ctx.closeTab(tabName)}
                 />

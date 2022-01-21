@@ -1,6 +1,8 @@
 <div class="box box-items-center background-25 pad-hor pad-vert">
     <img src="icons/cloud-compile.png" width="128px" alt="" />
-    <span class="foreground-cc font-small pad-vert font-x-large"> ShnooTalk Playground </span>
+    <span class="foreground-cc font-small pad-vert font-x-large">
+        ShnooTalk Playground
+    </span>
     <div class="box font-small box-items-center pad-hor">
         <a
             href="https://github.com/RainingComputers/ShnooTalk"

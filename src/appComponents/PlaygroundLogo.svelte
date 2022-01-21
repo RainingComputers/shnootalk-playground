@@ -19,6 +19,8 @@
 <div class={labelClass} on:click={onClick}>
     <img src="icons/logo.svg" class="" width="50px" alt="" />
     <span class="box">
-        <span class="pad-left-small text-no-wrap font-small">ShnooTalk Playground</span>
+        <span class="pad-left-small text-no-wrap font-small"
+            >ShnooTalk Playground</span
+        >
     </span>
 </div>

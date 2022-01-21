@@ -6,15 +6,9 @@
         "public/theme-vscode.js",
         "public/ace.js"
     ],
-    "exclude": [
-        "node_modules/*",
-        "__sapper__/*",
-        "public/*"
-    ],
+    "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
     "compilerOptions": {
-        "types": [
-            "svelte"
-        ],
+        "types": ["svelte"],
         "noImplicitAny": true
     }
 }
