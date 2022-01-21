@@ -2,14 +2,14 @@
     import Toolbar from "./components/Toolbar.svelte"
     import RunButton from "./components/RunButton.svelte"
     import PlaygroundLogo from "./appComponents/PlaygroundLogo.svelte"
-    import TabbedEditorContext from "./components/tabbedEditor/tabbedEditorContext"
+    import TabsContext from "./components/tabs/tabsContext"
     import TabbedEditorButtons from "./components/tabbedEditor/TabbedEditorButtons.svelte"
     import TabbedEditorContent from "./components/tabbedEditor/TabbedEditorContents.svelte"
     import Expand from "./components/Expand.svelte"
     import Modal from "./components/Modal.svelte"
     import TextInput from "./components/TextInput.svelte"
 
-    const tabbedEditorContext = new TabbedEditorContext(["main.shtk", "two.shtk"])
+    const tabbedEditorContext = new TabsContext(["main.shtk", "two.shtk"])
     let newTabModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
     let newTabTextInput: TextInput

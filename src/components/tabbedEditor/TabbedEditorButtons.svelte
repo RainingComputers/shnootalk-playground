@@ -3,24 +3,24 @@
     import IconButton from "../IconButton.svelte"
     import TabButton from "../tabs/TabButton.svelte"
     import Tabs from "../tabs/Tabs.svelte"
-    import type TabbedEditorContext from "./tabbedEditorContext"
+    import type TabsContext from "../tabs/tabsContext"
 
     export let expandHeight: boolean
-    export let ctx: TabbedEditorContext
+    export let ctx: TabsContext
 
     const dispatch = createEventDispatcher()
     const tabsList = ctx.tabsList
 
     function closeTab(tabName: string) {
-        ctx.tabsList.update((tabsList) => tabsList.filter((elem) => elem !== tabName))
+        ctx.closeTab(tabName)
     }
 
     export function addTab(tabName: string) {
-        ctx.tabsList.update((tabsList) => [...tabsList, tabName])
+        ctx.addTab(tabName)
     }
 </script>
 
-<Tabs ctx={ctx.tabsContext}>
+<Tabs {ctx}>
     <TabButton tabName={$tabsList[0]} {expandHeight} tabIcon="icons/code.svg" />
     {#each $tabsList.slice(1) as tabName}
         <TabButton
