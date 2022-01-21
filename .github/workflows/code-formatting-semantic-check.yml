@@ -1,0 +1,24 @@
+name: Code formatting, type and semantic checking
+
+on: push
+
+jobs:
+  code-check:
+    name: Code formatting, type and semantic checking
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set node version
+        id: set_node_version
+        run: echo "::set-output name=version::`cat .nvmrc`"
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.set_node_version.outputs.version }}
+      - name: Install dependencies
+        run: npm i
+      - name: Run svelte-check
+        run: npm run check
+      - name: Run prettier
+        run: npm run prettier

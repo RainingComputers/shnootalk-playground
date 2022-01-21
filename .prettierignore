@@ -3,3 +3,4 @@ build
 coverage
 public/ace/*.js
 .vscode
+.github
