@@ -1,11 +1,6 @@
 {
     "extends": "@tsconfig/svelte/tsconfig.json",
-    "include": [
-        "src/**/*",
-        "public/mode-shnootalk.js",
-        "public/theme-vscode.js",
-        "public/ace.js"
-    ],
+    "include": ["src/**/*"],
     "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
     "compilerOptions": {
         "types": ["svelte"],

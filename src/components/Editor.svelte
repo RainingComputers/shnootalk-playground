@@ -1,16 +1,18 @@
+<script context="module" lang="ts">
+    // @ts-ignore
+    window.ace.config.set("basePath", "/")
+</script>
+
 <script lang="ts">
     import { onDestroy, onMount } from "svelte"
-    import ace from "../../public/ace"
-
     export let fontSize: number
     export let editorId: string
 
     let editor: any = undefined
 
     onMount(() => {
-        ace.config.set("basePath", "/")
-
-        editor = ace.edit(editorId)
+        // @ts-ignore
+        editor = window.ace.edit(editorId)
         editor.setTheme("ace/theme/vscode")
         editor.session.setMode("ace/mode/shnootalk")
         editor.setFontSize(fontSize)

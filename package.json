@@ -6,8 +6,8 @@
         "build": "rollup -c",
         "dev": "rollup -c -w",
         "start": "sirv public --no-clear",
-        "check": "svelte-check --tsconfig ./tsconfig.json",
-        "format": "npx prettier --write ."
+        "check": "svelte-check --tsconfig ./tsconfig.json && prettier --check .",
+        "format": "prettier --write ."
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^17.0.0",
