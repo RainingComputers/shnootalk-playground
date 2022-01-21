@@ -57,7 +57,7 @@
         />
     {/if}
 
-    <span>{tabName}</span>
+    <span class="text-overflow-ellipses text-no-wrap">{tabName}</span>
 
     {#if onClose}
         <span class="box-child-float-right pad-left" />

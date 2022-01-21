@@ -11,14 +11,14 @@
     const currentTab = ctx.currentTab
     const editors: { [key: string]: Editor } = {}
 
-    export function focus() {
+    export async function focus() {
         if (editors[$currentTab]) editors[$currentTab].focus()
     }
 </script>
 
 <Tabs {ctx}>
     {#each $tabsList as tabName}
-        <TabContent {tabName} on:appear={() => editors[tabName].focus()}>
+        <TabContent {tabName} on:appear={focus}>
             <Editor {fontSize} editorId={tabName} bind:this={editors[tabName]} />
         </TabContent>
     {/each}

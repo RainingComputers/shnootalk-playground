@@ -1,5 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
+    import HorizontalScrollable from "../HorizontalScrollable.svelte"
     import IconButton from "../IconButton.svelte"
     import TabButton from "../tabs/TabButton.svelte"
     import Tabs from "../tabs/Tabs.svelte"
@@ -17,14 +18,17 @@
 </script>
 
 <Tabs {ctx}>
-    <TabButton tabName={$tabsList[0]} {expandHeight} tabIcon="icons/code.svg" />
-    {#each $tabsList.slice(1) as tabName}
-        <TabButton
-            {tabName}
-            {expandHeight}
-            tabIcon="icons/code.svg"
-            onClose={() => ctx.closeTab(tabName)}
-        />
-    {/each}
+    <HorizontalScrollable {expandHeight}>
+        <TabButton tabName={$tabsList[0]} {expandHeight} tabIcon="icons/code.svg" />
+        {#each $tabsList.slice(1) as tabName}
+            <TabButton
+                {tabName}
+                {expandHeight}
+                tabIcon="icons/code.svg"
+                onClose={() => ctx.closeTab(tabName)}
+            />
+        {/each}
+    </HorizontalScrollable>
+
     <IconButton icon="icons/plus.svg" onClick={() => dispatch("newTab")} />
 </Tabs>

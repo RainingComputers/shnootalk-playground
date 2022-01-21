@@ -10,7 +10,21 @@
     import TextInput from "./components/TextInput.svelte"
     import About from "./appComponents/About.svelte"
 
-    const tabbedEditorContext = new TabsContext(["main.shtk", "two.shtk"])
+    const tabbedEditorContext = new TabsContext([
+        "main.shtk",
+        "one",
+        "two",
+        "three",
+        "very long very long tab",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "another very long tab",
+        "nine",
+        "ten",
+    ])
     let newTabModal: Modal
     let aboutModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
