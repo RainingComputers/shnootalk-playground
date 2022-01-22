@@ -338,6 +338,10 @@ input:focus {
     background: var(--background-3c);
 }
 
+.hover-background:hover:not(.active) {
+    background: var(--hover-background);
+}
+
 /* Foregrounds */
 
 .active-foreground-f80.active,
@@ -356,10 +360,6 @@ input:focus {
 .placeholder-foreground-active::placeholder,
 .foreground-active {
     color: var(--foreground-active);
-}
-
-.hover-background:hover:not(.active) {
-    background: var(--hover-background);
 }
 
 /* Scrollbar */
