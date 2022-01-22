@@ -288,10 +288,6 @@ textarea:focus {
     border-bottom: solid 1px #373737;
 }
 
-.border-bottom-active.active {
-    border-bottom: solid 1px #ffffff;
-}
-
 /* Backgrounds */
 .background-1e,
 .hover-background-1e:hover:not(.active),
