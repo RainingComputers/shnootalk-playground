@@ -60,7 +60,7 @@
     </Modal>
 
     <Modal
-        width={25}
+        width={30}
         bind:this={aboutModal}
         onClose={() => {
             tabbedEditrorContents.focus()
