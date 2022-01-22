@@ -18,7 +18,7 @@
 
 <Tabs {ctx}>
     <HorizontalScrollable>
-        <div class="box box-arrange-hor box-height-full box-arrange-gap">
+        <div class="box box-arrange-hor box-height-full">
             <TabButton tabName={$tabsList[0]} tabIcon="icons/code.svg" />
             {#each $tabsList.slice(1) as tabName}
                 <TabButton

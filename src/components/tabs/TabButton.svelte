@@ -8,10 +8,11 @@
         "pad-vert",
         "active-background-1e",
         "hover-background-33",
-        "background-2d",
+        "background-1e",
         "foreground-f80",
         "active-foreground-cc",
         "box-height-full",
+        "border-bottom-active",
     ].join(" ")
 </script>
 
