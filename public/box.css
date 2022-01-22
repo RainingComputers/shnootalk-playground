@@ -50,8 +50,8 @@ img {
 
 span,
 input {
-    font: inherit !important;
-    font-size: inherit !important;
+    font: inherit;
+    font-size: inherit;
 }
 
 textarea,
@@ -163,7 +163,7 @@ input:focus {
 }
 
 .font-x-large {
-    font-size: x-large !important;
+    font-size: x-large;
 }
 
 .text-bold {
