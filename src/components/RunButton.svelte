@@ -25,7 +25,7 @@
     {disabled}
 >
     <img src="icons/play.svg" width="{iconWidth}px" alt="" />
-    <span class="pad-left-small foreground-white">Run</span>
+    <span class="pad-left-small foreground-active">Run</span>
 </button>
 
 <style>

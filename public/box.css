@@ -22,6 +22,21 @@
     USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+/* CSS Variables */
+
+:root {
+    --accent-color: #ff1a1a;
+    --background-1e: #1e1e1e;
+    --background-25: #252526;
+    --background-2d: #2d2d2d;
+    --background-33: #333333;
+    --background-3c: #3c3c3c;
+    --foreground-f80: #ffffff80;
+    --foreground-cc: #cccccc;
+    --foreground-active: #ffffff;
+    --hover-background: rgba(50, 50, 50, 50);
+}
+
 /* Default overrides */
 
 body {
@@ -49,6 +64,10 @@ input[type="text"] {
 
 textarea:focus {
     outline: none;
+}
+
+input:focus {
+    border: 0.5px solid var(--accent-color);
 }
 
 /* Containers */
@@ -292,31 +311,31 @@ textarea:focus {
 .background-1e,
 .hover-background-1e:hover:not(.active),
 .active-background-1e.active {
-    background: #1e1e1e;
+    background: var(--background-1e);
 }
 
 .background-25,
 .hover-background-25:hover:not(.active),
 .active-background-25.active {
-    background: #252526;
+    background: var(--background-25);
 }
 
 .background-2d,
 .hover-background-2d:hover:not(.active),
 .active-background-2d.active {
-    background: #2d2d2d;
+    background: var(--background-2d);
 }
 
 .background-33,
 .hover-background-33:hover:not(.active),
 .active-background-33.active {
-    background: #333333;
+    background: var(--background-33);
 }
 
 .background-3c,
 .hover-background-3c:hover:not(.active),
 .active-background-3c.active {
-    background: #3c3c3c;
+    background: var(--background-3c);
 }
 
 /* Foregrounds */
@@ -324,23 +343,23 @@ textarea:focus {
 .active-foreground-f80.active,
 .placeholder-foreground-f80::placeholder,
 .foreground-f80 {
-    color: #ffffff80;
+    color: var(--foreground-f80);
 }
 
 .active-foreground-cc.active,
 .placeholder-foreground-cc::placeholder,
 .foreground-cc {
-    color: #cccccc;
+    color: var(--foreground-cc);
 }
 
-.active-foreground-white.active,
-.placeholder-foreground-white::placeholder,
-.foreground-white {
-    color: #ffffff;
+.active-foreground-active.active,
+.placeholder-foreground-active::placeholder,
+.foreground-active {
+    color: var(--foreground-active);
 }
 
 .hover-background:hover:not(.active) {
-    background: rgba(50, 50, 50, 50);
+    background: var(--hover-background);
 }
 
 /* Scrollbar */
