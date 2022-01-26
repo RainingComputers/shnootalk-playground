@@ -9,6 +9,7 @@
     import Modal from "./components/Modal.svelte"
     import TextInput from "./components/TextInput.svelte"
     import About from "./appComponents/About.svelte"
+    import OutputPanel from "./appComponents/OutputPanel.svelte"
 
     const tabbedEditorContext = new TabsContext(["main.shtk"])
     let newTabModal: Modal
@@ -28,17 +29,13 @@
     }
 
     function onKeyDown(event: KeyboardEvent) {
-        if (event.key === "Escape") {
-            newTabModal.closeModal()
-            aboutModal.closeModal()
-            newTabTextInput.clear()
-            tabbedEditrorContents.focus()
-            event.preventDefault()
-        }
+        if (event.key !== "Escape") return
 
-        if (event.ctrlKey) {
-            openNewTabModal()
-        }
+        newTabModal.closeModal()
+        aboutModal.closeModal()
+        newTabTextInput.clear()
+        tabbedEditrorContents.focus()
+        event.preventDefault()
     }
 </script>
 
@@ -80,9 +77,13 @@
         <RunButton onClick={() => console.log("Run")} />
     </Toolbar>
 
-    <TabbedEditorContents
-        ctx={tabbedEditorContext}
-        fontSize={17}
-        bind:this={tabbedEditrorContents}
-    />
+    <div class="box box-arrange-hor box-width-full box-height-full">
+        <TabbedEditorContents
+            ctx={tabbedEditorContext}
+            fontSize={17}
+            bind:this={tabbedEditrorContents}
+        />
+
+        <OutputPanel />
+    </div>
 </main>
