@@ -14,9 +14,6 @@
     })
 </script>
 
-<div
-    class:box-display-none={$currentTab !== tabName}
-    class="box-child-grow"
->
+<div class:box-display-none={$currentTab !== tabName} class="box-child-grow">
     <slot />
 </div>

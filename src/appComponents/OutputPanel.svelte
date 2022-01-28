@@ -21,7 +21,7 @@
     import IconAndLabel from "../components/IconAndLabel.svelte"
     import Loading from "../components/Loading.svelte"
 
-    export let output: string 
+    export let output: string
     export let status: string
     export let loading: boolean
     export let ok: boolean
