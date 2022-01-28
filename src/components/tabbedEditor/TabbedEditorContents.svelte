@@ -14,6 +14,16 @@
     export function focus() {
         if (editors[$currentTab]) editors[$currentTab].focus()
     }
+
+    export function getContents() {
+        const contents: { [key: string]: string } = {}
+
+        for (let tabName of $tabsList) {
+            contents[tabName] = editors[tabName].getValue()
+        }
+
+        return contents
+    }
 </script>
 
 <Tabs {ctx}>

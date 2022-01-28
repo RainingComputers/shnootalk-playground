@@ -29,6 +29,10 @@
         // there is no other way to do this
         setTimeout(() => editor.focus(), 1)
     }
+
+    export function getValue(): string {
+        return editor.getValue()
+    }
 </script>
 
 <div class="box-height-full box-width-full" id={editorId} />

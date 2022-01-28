@@ -10,13 +10,19 @@
     import TextInput from "./components/TextInput.svelte"
     import About from "./appComponents/About.svelte"
     import OutputPanel from "./appComponents/OutputPanel.svelte"
+    import { CompileResult, dispatchProgram } from "./api/cloudCompile"
 
     const tabbedEditorContext = new TabsContext(["main.shtk"])
+    let status = ""
+    let output = ""
+    let isLoading = false
+
     let newTabModal: Modal
     let aboutModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
     let tabbedEditrorContents: TabbedEditorContents
     let newTabTextInput: TextInput
+    let outputPanel: OutputPanel
 
     function openNewTabModal() {
         newTabModal.openModal()
@@ -37,6 +43,23 @@
         tabbedEditrorContents.focus()
         event.preventDefault()
     }
+
+    function setStatusAndOutput(result: CompileResult) {
+        status = result.status.toString()
+        output = result.output
+        isLoading = outputPanel.isLoading()
+    }
+
+    function compileAndStartStatusPoll() {
+        const programs = {
+            ...tabbedEditrorContents.getContents(),
+            input: outputPanel.getInput(),
+        }
+
+        dispatchProgram(programs, setStatusAndOutput)
+    }
+
+    $: reactiveStatus = status
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
@@ -74,7 +97,7 @@
         />
         <Expand />
         <PlaygroundLogo onClick={() => aboutModal.openModal()} />
-        <RunButton onClick={() => console.log("Run")} />
+        <RunButton onClick={compileAndStartStatusPoll} disabled={isLoading} />
     </Toolbar>
 
     <div class="box box-arrange-hor box-width-full box-height-full">
@@ -84,6 +107,6 @@
             bind:this={tabbedEditrorContents}
         />
 
-        <OutputPanel />
+        <OutputPanel status={reactiveStatus} {output} bind:this={outputPanel} />
     </div>
 </main>
