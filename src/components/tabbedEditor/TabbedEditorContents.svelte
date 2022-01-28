@@ -24,6 +24,10 @@
 
         return contents
     }
+
+    export function setContent(tabName: string, content: string) {
+        editors[tabName].setValue(content)
+    }
 </script>
 
 <Tabs {ctx}>

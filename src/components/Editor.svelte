@@ -33,6 +33,10 @@
     export function getValue(): string {
         return editor.getValue()
     }
+
+    export function setValue(content: string) {
+        editor.setValue(content, 1)
+    }
 </script>
 
 <div class="box-height-full box-width-full" id={editorId} />

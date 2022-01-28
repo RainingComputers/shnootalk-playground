@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { onMount } from "svelte"
     import {
         CompileResult,
         dispatchProgram,
         loadingStatus,
         successStatus,
     } from "./api/cloudCompile"
+    import helloWorldProgram from "./shnooTalkHelloWorld"
     import Toolbar from "./components/Toolbar.svelte"
     import RunButton from "./components/RunButton.svelte"
     import PlaygroundLogo from "./appComponents/PlaygroundLogo.svelte"
@@ -19,6 +21,7 @@
     import InputPanel from "./appComponents/InputPanel.svelte"
 
     const tabbedEditorContext = new TabsContext(["main.shtk"])
+
     let status = ""
     let output = ""
     let loading: boolean = false
@@ -71,6 +74,11 @@
 
         dispatchProgram(programs, setStatusAndOutput)
     }
+
+    onMount(() => {
+        tabbedEditrorContents.setContent("main.shtk", helloWorldProgram)
+        tabbedEditrorContents.focus()
+    })
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
