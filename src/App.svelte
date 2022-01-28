@@ -1,5 +1,10 @@
 <script lang="ts">
-    import { CompileResult, dispatchProgram } from "./api/cloudCompile"
+    import {
+        CompileResult,
+        dispatchProgram,
+        loadingStatus,
+        successStatus,
+    } from "./api/cloudCompile"
     import Toolbar from "./components/Toolbar.svelte"
     import RunButton from "./components/RunButton.svelte"
     import PlaygroundLogo from "./appComponents/PlaygroundLogo.svelte"
@@ -16,14 +21,15 @@
     const tabbedEditorContext = new TabsContext(["main.shtk"])
     let status = ""
     let output = ""
-    let isLoading = false
+    let loading: boolean = false
+    let ok: boolean = false
+    let error: boolean = false
 
     let newTabModal: Modal
     let aboutModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
     let tabbedEditrorContents: TabbedEditorContents
     let newTabTextInput: TextInput
-    let outputPanel: OutputPanel
     let inputPanel: InputPanel
 
     function openNewTabModal() {
@@ -49,10 +55,15 @@
     function setStatusAndOutput(result: CompileResult) {
         status = result.status.toString()
         output = result.output
-        isLoading = outputPanel.isLoading()
+
+        loading = loadingStatus.includes(status)
+        ok = successStatus.includes(status) && !loading
+        error = !ok && !loading
     }
 
     function compileAndStartStatusPoll() {
+        loading = true
+
         const programs = {
             ...tabbedEditrorContents.getContents(),
             input: inputPanel.getInput(),
@@ -60,8 +71,6 @@
 
         dispatchProgram(programs, setStatusAndOutput)
     }
-
-    $: reactiveStatus = status
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
@@ -99,7 +108,7 @@
         />
         <Expand />
         <PlaygroundLogo onClick={() => aboutModal.openModal()} />
-        <RunButton onClick={compileAndStartStatusPoll} disabled={isLoading} />
+        <RunButton onClick={compileAndStartStatusPoll} disabled={loading} />
     </Toolbar>
 
     <div class="box box-arrange-hor box-width-full box-height-full">
@@ -109,12 +118,8 @@
             bind:this={tabbedEditrorContents}
         />
 
-        <div class="box background-2d box-width-45">
-            <OutputPanel
-                status={reactiveStatus}
-                {output}
-                bind:this={outputPanel}
-            />
+        <div class="box background-2d box-width-35">
+            <OutputPanel {status} {output} {loading} {ok} {error} />
             <InputPanel bind:this={inputPanel} />
         </div>
     </div>

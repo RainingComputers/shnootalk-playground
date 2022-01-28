@@ -1,6 +1,4 @@
 <script context="module" lang="ts">
-    import { loadingStatus, successStatus } from "../api/cloudCompile"
-
     const displayStringMap: { [key: string]: string } = {
         SENDING_REQUEST: "Sending request",
         SCHEDULED: "Scheduled",
@@ -23,16 +21,11 @@
     import IconAndLabel from "../components/IconAndLabel.svelte"
     import Loading from "../components/Loading.svelte"
 
-    export let output: string = ""
-    export let status: string = ""
-
-    const loading = loadingStatus.includes(status)
-    const ok = successStatus.includes(status) && !loading
-    const error = !ok && !loading && status.length !== 0
-
-    export function isLoading() {
-        return loading
-    }
+    export let output: string 
+    export let status: string
+    export let loading: boolean
+    export let ok: boolean
+    export let error: boolean
 </script>
 
 <IconAndLabel icon="icons/terminal.svg" label="OUTPUT">

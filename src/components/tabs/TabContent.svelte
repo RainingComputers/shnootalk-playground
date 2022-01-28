@@ -4,7 +4,6 @@
     import type TabsContext from "./tabsContext"
 
     export let tabName: string
-    export let expand: boolean = true
 
     const dispatch = createEventDispatcher()
     const ctx: TabsContext = getContext(TABS)
@@ -17,8 +16,7 @@
 
 <div
     class:box-display-none={$currentTab !== tabName}
-    class:box-height-full={expand}
-    class:box-width-full={expand}
+    class="box-child-grow"
 >
     <slot />
 </div>
