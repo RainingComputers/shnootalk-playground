@@ -57,6 +57,7 @@ async function pollCompileServerForStatus(
 
 export function validateFileNames(programs: { [key: string]: string }) {
     for (const name in programs) {
+        if (name == "input") continue
         if (!name.match(/\w+.shtk/)) return false
     }
 
