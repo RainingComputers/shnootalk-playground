@@ -55,11 +55,28 @@ async function pollCompileServerForStatus(
     }
 }
 
+export function validateFileNames(programs: { [key: string]: string }) {
+    for (const name in programs) {
+        if (!name.match(/\w+.shtk/)) return false
+    }
+
+    return true
+}
+
 export async function dispatchProgram(
     programs: { [key: string]: string },
     statusCallback: (result: CompileResult) => void
 ) {
     try {
+        if (!validateFileNames(programs)) {
+            statusCallback({
+                status: CompileStatus.COMPILE_FAILED,
+                output: "File names should end with the extension '.shtk'",
+            })
+
+            return
+        }
+
         statusCallback({ status: CompileStatus.SENDING_REQUEST, output: "" })
 
         const response = await makeRequest(DISPATCH_ENDPOINT, "POST", programs)
