@@ -1,4 +1,4 @@
-![](public/icons/cloud-compile.png)
+![](ui/public/icons/cloud-compile.png)
 
 # ShnooTalk Playground (Svelte Version)
 
