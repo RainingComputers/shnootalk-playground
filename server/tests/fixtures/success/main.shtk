@@ -1,0 +1,8 @@
+use "foobar.shtk" as foobar
+
+fn main() -> int
+{
+    println("Hello world")
+    foobar::foobar()
+    return 0
+}

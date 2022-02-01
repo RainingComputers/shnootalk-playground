@@ -1,0 +1,21 @@
+# python
+__pycache__/
+*.pyc
+
+# pytest
+.pytest_cache/
+
+# virtual environment
+.venv
+
+# pip
+build/
+dist/
+*.egg-info/
+
+# temp folders
+temp/
+zipdata/
+
+# mypy
+.mypy_cache/

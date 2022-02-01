@@ -1,0 +1,7 @@
+extfn doesNotExist()
+
+fn main() -> int
+{
+    doesNotExist()
+    return 0
+}
