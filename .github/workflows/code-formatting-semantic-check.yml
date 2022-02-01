@@ -18,7 +18,10 @@ jobs:
           node-version: ${{ steps.set_node_version.outputs.version }}
       - name: Install dependencies
         run: npm i
+        working-directory: ui
       - name: Run svelte-check
         run: npm run check
+        working-directory: ui
       - name: Run prettier
         run: npm run prettier
+        working-directory: ui
