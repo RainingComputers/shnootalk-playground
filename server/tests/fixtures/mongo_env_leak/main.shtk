@@ -1,7 +1,0 @@
-extfn getenv(env: char[]) -> char[]
-
-fn main() -> int
-{
-    println(getenv("MONGO_URL"))
-    return 0
-}
