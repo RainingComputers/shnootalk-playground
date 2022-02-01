@@ -2,7 +2,7 @@
 
 import pytest
 
-from shnootalk_playground_server.__main__ import Result
+from shnootalk_playground_server.compiler import Result
 
 fixtures_dir_list = [
     './tests/fixtures/success',
@@ -47,7 +47,7 @@ def test_main(work_dir: str,
               expected_result: str,
               expected_output: str) -> None:
 
-    from shnootalk_playground_server.__main__ import compile_shnootalk
+    from shnootalk_playground_server.compiler import compile_shnootalk
 
     result, output = compile_shnootalk(fixture_dir, work_dir, 1)
 
