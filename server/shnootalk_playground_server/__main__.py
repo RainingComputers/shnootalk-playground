@@ -9,7 +9,7 @@ import shutil
 
 
 class Config:
-    TIMEOUT = int(os.getenv('TIMEOUT', default='10'))
+    TIMEOUT = int(os.getenv('TIMEOUT', default='5'))
     C_COMPILER = 'clang'
     SHNOOTALK_COMPILER = 'shtkc'
 
