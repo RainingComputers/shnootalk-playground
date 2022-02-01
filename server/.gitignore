@@ -16,6 +16,7 @@ dist/
 # temp folders
 temp/
 zipdata/
+work_dir/
 
 # mypy
 .mypy_cache/

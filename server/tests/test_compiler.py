@@ -1,8 +1,13 @@
-# pylint: disable=import-outside-toplevel
+# pylint: disable=import-outside-toplevel, redefined-outer-name
 
+from typing import Iterator
+
+import os
+import shutil
 import pytest
 
-from shnootalk_playground_server.compiler import Result
+from shnootalk_playground_server.compiler import compile_shnootalk, Result
+
 
 fixtures_dir_list = [
     './tests/fixtures/success',
@@ -40,14 +45,27 @@ expected_result_list = [
 ]
 
 
+@pytest.fixture
+def work_dir() -> Iterator[str]:
+    dir_name = 'work_dir'
+
+    shutil.rmtree(dir_name, ignore_errors=True)
+
+    cwd = os.getcwd()
+    os.mkdir(dir_name)
+
+    yield dir_name
+
+    os.chdir(cwd)
+    shutil.rmtree(dir_name)
+
+
 @pytest.mark.parametrize("fixture_dir,expected_result,expected_output",
                          zip(fixtures_dir_list, expected_result_list, expected_outputs_list))
 def test_main(work_dir: str,
               fixture_dir: str,
               expected_result: str,
               expected_output: str) -> None:
-
-    from shnootalk_playground_server.compiler import compile_shnootalk
 
     result, output = compile_shnootalk(fixture_dir, work_dir, 1)
 
