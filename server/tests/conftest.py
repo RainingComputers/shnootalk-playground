@@ -18,6 +18,3 @@ def work_dir() -> Iterator[str]:
 
     os.chdir(cwd)
     shutil.rmtree(dir_name)
-
-
-os.environ['TIMEOUT'] = '1'

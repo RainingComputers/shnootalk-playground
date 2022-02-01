@@ -49,7 +49,7 @@ def test_main(work_dir: str,
 
     from shnootalk_playground_server.__main__ import compile_shnootalk
 
-    result, output = compile_shnootalk(fixture_dir, work_dir)
+    result, output = compile_shnootalk(fixture_dir, work_dir, 1)
 
     assert result == expected_result
     if 'link_fail' not in fixture_dir:

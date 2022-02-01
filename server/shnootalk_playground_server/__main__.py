@@ -1,17 +1,13 @@
 from typing import List, Optional, Tuple
 from enum import Enum
 
-
 import subprocess
 import os
 import glob
 import shutil
 
-
-class Config:
-    TIMEOUT = int(os.getenv('TIMEOUT', default='5'))
-    C_COMPILER = 'clang'
-    SHNOOTALK_COMPILER = 'shtkc'
+C_COMPILER = 'clang'
+SHNOOTALK_COMPILER = 'shtkc'
 
 
 class Result(str, Enum):
@@ -24,10 +20,11 @@ class Result(str, Enum):
 
 
 def run_subprocess(command: List[str],
-                   input_str: str = '') -> Tuple[bool, Optional[str], Optional[int]]:
+                   input_str: str = '',
+                   timeout: int = 5) -> Tuple[bool, Optional[str], Optional[int]]:
     try:
         subp = subprocess.run(command, capture_output=True, text=True,
-                              timeout=Config.TIMEOUT, input=input_str)
+                              timeout=timeout, input=input_str)
 
     except subprocess.TimeoutExpired:
         return True, None, None
@@ -35,14 +32,16 @@ def run_subprocess(command: List[str],
     return False, subp.stdout+subp.stderr, subp.returncode
 
 
-def run_program(file_name: str, input_str: str) -> Tuple[Result, Optional[str]]:
+def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, Optional[str]]:
     # Remove all object files before running the test
     os.system('rm -f *.o')
     os.system('rm -f ./test')
 
     # Run the compiler
-    compile_command = [Config.SHNOOTALK_COMPILER, file_name, '-c']
-    timedout, compiler_output, compiler_retcode = run_subprocess(compile_command)
+    compile_command = [SHNOOTALK_COMPILER, file_name, '-c']
+    timedout, compiler_output, compiler_retcode = run_subprocess(
+        compile_command, input_str, timeout
+    )
 
     if timedout:
         return Result.COMPILE_TIMEDOUT, None
@@ -53,7 +52,7 @@ def run_program(file_name: str, input_str: str) -> Tuple[Result, Optional[str]]:
 
     # Link object file into an executable
     object_files = glob.glob("*.o")
-    link_command = [Config.C_COMPILER] + object_files + ['-o', 'prog', '-lm']
+    link_command = [C_COMPILER] + object_files + ['-o', 'prog', '-lm']
     timedout, clang_output, clang_retcode = run_subprocess(link_command)
 
     if timedout:
@@ -91,9 +90,10 @@ def get_string_from_file(file_name: str) -> str:
     return open(file_name, encoding='utf-8').read()
 
 
-def compile_shnootalk(configmap_dir: str, work_dir: str) -> Tuple[Result, Optional[str]]:
+def compile_shnootalk(configmap_dir: str,
+                      work_dir: str, timeout: int = 5) -> Tuple[Result, Optional[str]]:
     # Copy files from config map to scratch volume
     copy_program_files_and_cwd(configmap_dir, work_dir)
 
     # Run the program and get output
-    return run_program('main.shtk', get_string_from_file('input'))
+    return run_program('main.shtk', get_string_from_file('input'), timeout)
