@@ -3,14 +3,15 @@ import os
 import secrets
 import shutil
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from http import HTTPStatus
 
 from shnootalk_playground_server.compiler import compile_shnootalk
+from shnootalk_playground_server.validate import validate
 
 
 WORK_DIR_BASE = os.getenv("WORK_DIR_BASE", os.getcwd())
 TIMEOUT = int(os.getenv("TIMEOUT", "5"))
-
 
 app = FastAPI()
 
@@ -31,6 +32,12 @@ def gen_work_dir(programs: Dict[str, str]) -> str:
 
 @app.post("/api/v2/compile")
 def compile(programs: Dict[str, str]) -> Dict[str, Optional[str]]:
+    if not validate(programs):
+        raise HTTPException(
+            HTTPStatus.BAD_REQUEST,
+            detail="Program too big or file names are invalid"
+        )
+
     work_dir = gen_work_dir(programs)
 
     result, output = compile_shnootalk(
