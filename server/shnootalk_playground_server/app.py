@@ -39,6 +39,6 @@ def compile(programs: Dict[str, str]) -> Dict[str, Optional[str]]:
         programs.get("input", "")
     )
 
-    # shutil.rmtree(work_dir)
+    shutil.rmtree(work_dir)
 
     return {"result": result, "output": output}
