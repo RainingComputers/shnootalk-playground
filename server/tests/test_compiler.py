@@ -60,14 +60,23 @@ def work_dir() -> Iterator[str]:
     shutil.rmtree(dir_name)
 
 
+def copy_program_files(fixture_dir: str, work_dir: str) -> None:
+    for file in os.listdir(fixture_dir):
+        shutil.copy(
+            os.path.join(fixture_dir, file),
+            os.path.join(work_dir, file)
+        )
+
+
 @pytest.mark.parametrize("fixture_dir,expected_result,expected_output",
                          zip(fixtures_dir_list, expected_result_list, expected_outputs_list))
 def test_main(work_dir: str,
               fixture_dir: str,
               expected_result: str,
               expected_output: str) -> None:
+    copy_program_files(fixture_dir, work_dir)
 
-    result, output = compile_shnootalk(fixture_dir, work_dir, 1)
+    result, output = compile_shnootalk(work_dir, 1)
 
     assert result == expected_result
     if 'link_fail' not in fixture_dir:

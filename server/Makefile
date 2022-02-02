@@ -22,6 +22,8 @@ help:
 clean:
 	rm -f -r $(APP_NAME)/__pycache__
 	rm -f -r .pytest_cache/
+	rm -f tests/fixtures/*/*.o
+	rm -f -r tests/fixtures/*/*prog*
 	find . -type d -name  "__pycache__" -exec rm -r {} +
 	rm -f -r build/
 	rm -f -r dist/

@@ -72,17 +72,6 @@ def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, O
     return Result.SUCCESS, exec_output
 
 
-def list_files_only(dir_path: str) -> List[str]:
-    return [f for f in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, f))]
-
-
-def copy_program_files_and_cwd(configmap_dir: str, work_dir: str) -> None:
-    for file in list_files_only(configmap_dir):
-        shutil.copy(os.path.join(configmap_dir, file), os.path.join(work_dir, file))
-
-    os.chdir(work_dir)
-
-
 def get_string_from_file(file_name: str) -> str:
     if not os.path.exists(file_name):
         return ''
@@ -90,10 +79,9 @@ def get_string_from_file(file_name: str) -> str:
     return open(file_name, encoding='utf-8').read()
 
 
-def compile_shnootalk(configmap_dir: str,
-                      work_dir: str, timeout: int = 5) -> Tuple[Result, Optional[str]]:
-    # Copy files from config map to scratch volume
-    copy_program_files_and_cwd(configmap_dir, work_dir)
+def compile_shnootalk(work_dir: str, timeout: int) -> Tuple[Result, Optional[str]]:
+    os.chdir(work_dir)
+    result, output = run_program('main.shtk', get_string_from_file('input'), timeout)
+    os.chdir("..")
 
-    # Run the program and get output
-    return run_program('main.shtk', get_string_from_file('input'), timeout)
+    return result, output

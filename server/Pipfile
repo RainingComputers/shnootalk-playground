@@ -14,3 +14,5 @@ shnootalk_playground_server = {editable = true,path = "."}
 python_version = "3.8"
 
 [packages]
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
