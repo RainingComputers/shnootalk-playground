@@ -13,8 +13,13 @@
     import About from "./appComponents/About.svelte"
     import OutputPanel from "./appComponents/OutputPanel.svelte"
     import InputPanel from "./appComponents/InputPanel.svelte"
+    import { CompileResult, makeCompileRequest } from "./api/cloudCompile"
 
     const tabbedEditorContext = new TabsContext(["main.shtk"])
+    let output: string = ""
+    let loading: boolean = false
+    let ok: boolean = false
+    let error: boolean = false
 
     let newTabModal: Modal
     let aboutModal: Modal
@@ -22,7 +27,6 @@
     let tabbedEditrorContents: TabbedEditorContents
     let newTabTextInput: TextInput
     let inputPanel: InputPanel
-    let outputPanel: OutputPanel
 
     function openNewTabModal() {
         newTabModal.openModal()
@@ -44,13 +48,21 @@
         event.preventDefault()
     }
 
-    function startCompile() {
+    async function startCompile() {
         const programs = {
             ...tabbedEditrorContents.getContents(),
             input: inputPanel.getInput(),
         }
 
-        outputPanel.compileProgram(programs)
+        loading = true
+
+        const response = await makeCompileRequest(programs)
+        const result = response.result
+        output = response.output
+        ok = result === CompileResult.SUCCESS
+        error = !ok
+
+        loading = false
     }
 
     onMount(() => {
@@ -94,7 +106,7 @@
         />
         <Expand />
         <PlaygroundLogo onClick={() => aboutModal.openModal()} />
-        <RunButton onClick={startCompile} disabled={false} />
+        <RunButton onClick={startCompile} disabled={loading} />
     </Toolbar>
 
     <div class="box box-arrange-hor box-width-full box-height-full">
@@ -105,7 +117,7 @@
         />
 
         <div class="box background-2d box-width-35">
-            <OutputPanel bind:this={outputPanel} />
+            <OutputPanel {output} {loading} {ok} {error} />
             <InputPanel bind:this={inputPanel} />
         </div>
     </div>
