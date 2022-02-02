@@ -76,7 +76,7 @@ def test_main(work_dir: str,
               expected_output: str) -> None:
     copy_program_files(fixture_dir, work_dir)
 
-    result, output = compile_shnootalk(work_dir, 1)
+    result, output = compile_shnootalk(work_dir, 1, "Hello")
 
     assert result == expected_result
     if 'link_fail' not in fixture_dir:

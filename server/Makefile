@@ -36,3 +36,6 @@ lint:
 
 typechk:
 	mypy --package $(APP_NAME) --namespace-packages --install-types
+
+rundev:
+	uvicorn $(APP_NAME):app --reload

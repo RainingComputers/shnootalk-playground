@@ -12,6 +12,7 @@
         "bson",
         "chdir",
         "configmap",
+        "dirctx",
         "getenv",
         "Haha",
         "println",
