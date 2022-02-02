@@ -36,10 +36,6 @@ def run_subprocess(command: List[str],
 
 
 def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, Optional[str]]:
-    # Remove all object files before running the test
-    os.system('rm -f *.o')
-    os.system('rm -f ./test')
-
     # Run the compiler
     compile_command = [SHNOOTALK_COMPILER, file_name, '-c']
     timedout, compiler_output, compiler_retcode = run_subprocess(
