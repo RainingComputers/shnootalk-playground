@@ -1,98 +1,42 @@
 import { makeRequest } from "./request"
 
-const SERVER_URL =
-    "https://shnootalk-cloud-compile.loophole.site/shnootalk/compile/api/v1/"
-const DISPATCH_ENDPOINT = SERVER_URL + "dispatch"
-const POLL_FREQUENCY = 250
+const SERVER_URL = "http://127.0.0.1:8000/api/v2/compile"
 const MESSAGE_500 = "Something went wrong, please try again later"
 
-export enum CompileStatus {
-    SENDING_REQUEST = "SENDING_REQUEST",
-    SCHEDULED = "SCHEDULED",
+export enum CompileResult {
     EXEC_TIMEDOUT = "EXEC_TIMEDOUT",
     CLANG_LINK_TIMEDOUT = "CLANG_LINK_TIMEDOUT",
     CLANG_LINK_FAILED = "CLANG_LINK_FAILED",
     COMPILE_FAILED = "COMPILE_FAILED",
     COMPILE_TIMEDOUT = "COMPILE_TIMEDOUT",
-    COMPILE_STARTED = "COMPILE_STARTED",
     SUCCESS = "SUCCESS",
 }
 
-export interface CompileResult {
+interface CompileResponse {
     output: string
-    status: CompileStatus
+    result: CompileResult
 }
 
-export const loadingStatus: string[] = [
-    CompileStatus.SENDING_REQUEST,
-    CompileStatus.SCHEDULED,
-    CompileStatus.COMPILE_STARTED,
-]
-
-export const successStatus: string[] = [CompileStatus.SUCCESS]
-
-const SOMETHING_WENT_WRONG: CompileResult = {
+const SOMETHING_WENT_WRONG: CompileResponse = {
     output: MESSAGE_500,
-    status: CompileStatus.COMPILE_FAILED,
+    result: CompileResult.COMPILE_FAILED,
 }
 
-function getStatusEndPointURL(programId: string) {
-    return SERVER_URL + "status/" + programId
+const TIMED_OUT: CompileResponse = {
+    output: "Execution has timed out",
+    result: CompileResult.EXEC_TIMEDOUT,
 }
 
-async function pollCompileServerForStatus(
-    programId: string,
-    statusCallback: (result: CompileResult) => void,
-    stopIntervalCallback: any
-) {
+export async function makeCompileRequest(programs: {
+    [key: string]: string
+}): Promise<CompileResponse> {
     try {
-        const result = await makeRequest(getStatusEndPointURL(programId), "GET")
-        statusCallback(result)
-        if (!loadingStatus.includes(result.status)) stopIntervalCallback()
+        const response = await makeRequest(SERVER_URL, "post", programs)
+
+        if (response.result === CompileResult.EXEC_TIMEDOUT) return TIMED_OUT
+
+        return response
     } catch {
-        statusCallback(SOMETHING_WENT_WRONG)
-        stopIntervalCallback()
-    }
-}
-
-export function validateFileNames(programs: { [key: string]: string }) {
-    for (const name in programs) {
-        if (name == "input") continue
-        if (!name.match(/\w+.shtk/)) return false
-    }
-
-    return true
-}
-
-export async function dispatchProgram(
-    programs: { [key: string]: string },
-    statusCallback: (result: CompileResult) => void
-) {
-    try {
-        if (!validateFileNames(programs)) {
-            statusCallback({
-                status: CompileStatus.COMPILE_FAILED,
-                output: "File names should end with the extension '.shtk'",
-            })
-
-            return
-        }
-
-        statusCallback({ status: CompileStatus.SENDING_REQUEST, output: "" })
-
-        const response = await makeRequest(DISPATCH_ENDPOINT, "POST", programs)
-        const programId = response["_id"]
-
-        let intervalId = setInterval(
-            pollCompileServerForStatus,
-            POLL_FREQUENCY,
-            programId,
-            statusCallback,
-            () => {
-                clearInterval(intervalId)
-            }
-        )
-    } catch {
-        statusCallback(SOMETHING_WENT_WRONG)
+        return SOMETHING_WENT_WRONG
     }
 }

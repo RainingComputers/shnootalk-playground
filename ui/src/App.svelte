@@ -1,11 +1,5 @@
 <script lang="ts">
     import { onMount } from "svelte"
-    import {
-        CompileResult,
-        dispatchProgram,
-        loadingStatus,
-        successStatus,
-    } from "./api/cloudCompile"
     import helloWorldProgram from "./shnooTalkHelloWorld"
     import Toolbar from "./components/Toolbar.svelte"
     import RunButton from "./components/RunButton.svelte"
@@ -22,18 +16,13 @@
 
     const tabbedEditorContext = new TabsContext(["main.shtk"])
 
-    let status = ""
-    let output = ""
-    let loading: boolean = false
-    let ok: boolean = false
-    let error: boolean = false
-
     let newTabModal: Modal
     let aboutModal: Modal
     let tabbedEditorButtons: TabbedEditorButtons
     let tabbedEditrorContents: TabbedEditorContents
     let newTabTextInput: TextInput
     let inputPanel: InputPanel
+    let outputPanel: OutputPanel
 
     function openNewTabModal() {
         newTabModal.openModal()
@@ -55,24 +44,13 @@
         event.preventDefault()
     }
 
-    function setStatusAndOutput(result: CompileResult) {
-        status = result.status.toString()
-        output = result.output
-
-        loading = loadingStatus.includes(status)
-        ok = successStatus.includes(status) && !loading
-        error = !ok && !loading
-    }
-
-    function compileAndStartStatusPoll() {
-        loading = true
-
+    function startCompile() {
         const programs = {
             ...tabbedEditrorContents.getContents(),
             input: inputPanel.getInput(),
         }
 
-        dispatchProgram(programs, setStatusAndOutput)
+        outputPanel.compileProgram(programs)
     }
 
     onMount(() => {
@@ -116,7 +94,7 @@
         />
         <Expand />
         <PlaygroundLogo onClick={() => aboutModal.openModal()} />
-        <RunButton onClick={compileAndStartStatusPoll} disabled={loading} />
+        <RunButton onClick={startCompile} disabled={false} />
     </Toolbar>
 
     <div class="box box-arrange-hor box-width-full box-height-full">
@@ -127,7 +105,7 @@
         />
 
         <div class="box background-2d box-width-35">
-            <OutputPanel {status} {output} {loading} {ok} {error} />
+            <OutputPanel bind:this={outputPanel} />
             <InputPanel bind:this={inputPanel} />
         </div>
     </div>

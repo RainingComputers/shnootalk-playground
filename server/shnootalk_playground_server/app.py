@@ -2,9 +2,10 @@ from typing import Dict, Optional
 import os
 import secrets
 import shutil
+from http import HTTPStatus
 
 from fastapi import FastAPI, HTTPException
-from http import HTTPStatus
+from fastapi.middleware.cors import CORSMiddleware
 
 from shnootalk_playground_server.compiler import compile_shnootalk
 from shnootalk_playground_server.validate import validate
@@ -14,6 +15,13 @@ WORK_DIR_BASE = os.getenv("WORK_DIR_BASE", os.getcwd())
 TIMEOUT = int(os.getenv("TIMEOUT", "5"))
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def gen_work_dir(programs: Dict[str, str]) -> str:
