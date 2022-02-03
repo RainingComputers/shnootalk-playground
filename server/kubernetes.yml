@@ -34,7 +34,8 @@ spec:
               mountPath: /work-dir/
       volumes:
         - name: work-dir
-          emptyDir: {}
+          emptyDir:
+            medium: Memory
 ---
 apiVersion: v1
 kind: Service
