@@ -27,6 +27,7 @@ clean:
 	find . -type d -name  "__pycache__" -exec rm -r {} +
 	rm -f -r build/
 	rm -f -r dist/
+	rm -rf .mypy_cache
 
 test:
 	pytest tests -vv

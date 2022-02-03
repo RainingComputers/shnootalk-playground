@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shnootalk-playground-server
+  labels:
+    app: shnootalk-playground-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: shnootalk-playground-server
+  template:
+    metadata:
+      labels:
+        app: shnootalk-playground-server
+    spec:
+      containers:
+        - name: shnootalk-playground-server
+          image: docker.io/shnoo28/shnootalk-playground-server:0.2.16
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:  
+              memory: 128Mi
+              cpu: 250m
+            limits:
+              memory: 256Mi
+              cpu: 500m
+          env:
+            - name: WORK_DIR_BASE
+              value: "/work-dir/"
+          volumeMounts:
+            - name: work-dir
+              mountPath: /work-dir/
+      volumes:
+        - name: work-dir
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shnootalk-playground-service
+spec:
+  selector:
+    app: shnootalk-playground-server
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shnootalk-playground-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  defaultBackend:
+    service:
+      name: shnootalk-playground-service
+      port:
+        number: 8000
+  

@@ -1,6 +1,6 @@
 import { makeRequest } from "./request"
 
-const SERVER_URL = "http://127.0.0.1:8000/api/v2/compile"
+const SERVER_URL = "http://127.0.0.1:8000/shnootalk_playground/api/v2/compile"
 const MESSAGE_500 = "Something went wrong, please try again later"
 
 export enum CompileResult {
