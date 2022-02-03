@@ -1,6 +1,6 @@
 APP_NAME = shnootalk_playground_server
-DOCKER_BASE_NAME = shnootalk-cloud-compile-job
-DOCKER_TAG_VERSION = 0.2.4
+DOCKER_BASE_NAME = shnootalk-playground-server
+DOCKER_TAG_VERSION = 0.0.1
 
 .PHONY: help push clean test lint  typechk push
 
@@ -40,3 +40,7 @@ typechk:
 
 rundev:
 	uvicorn $(APP_NAME):app --reload
+
+push:
+	docker buildx build --platform linux/arm64 . -t shnoo28/$(DOCKER_BASE_NAME):$(DOCKER_TAG_VERSION)
+	docker push shnoo28/$(DOCKER_BASE_NAME):$(DOCKER_TAG_VERSION)
