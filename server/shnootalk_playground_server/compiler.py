@@ -9,7 +9,7 @@ import shutil
 from shnootalk_playground_server.dirctx import dirctx
 
 
-C_COMPILER = 'clang'
+C_COMPILER = 'g++'
 SHNOOTALK_COMPILER = 'shtkc'
 
 

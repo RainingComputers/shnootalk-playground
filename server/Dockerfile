@@ -1,10 +1,12 @@
-FROM fedora:latest
+FROM ubuntu:latest
 
-RUN yum -y upgrade
-RUN yum -y install llvm12 llvm12-devel clang make findutils git python3 python3-pip
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get -y install tar g++ make findutils llvm-12 git python3 python3-pip
 
 RUN git clone https://github.com/RainingComputers/ShnooTalk
 RUN cd ShnooTalk; make build; make install
+
 COPY ./shnootalk_playground_server ./shnootalk_playground_server
 COPY ./Pipfile .
 COPY ./Pipfile.lock .

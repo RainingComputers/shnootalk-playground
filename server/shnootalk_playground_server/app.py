@@ -38,7 +38,7 @@ def gen_work_dir(programs: Dict[str, str]) -> str:
     return work_dir
 
 
-@app.post("/shnootalk_playground/api/v2/compile")
+@app.post("/shnootalk-playground/api/v2/compile")
 def compile(programs: Dict[str, str]) -> Dict[str, Optional[str]]:
     if not validate(programs):
         raise HTTPException(
