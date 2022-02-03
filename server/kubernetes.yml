@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: shnootalk-playground-server
-          image: docker.io/shnoo28/shnootalk-playground-server:0.2.16
+          image: docker.io/shnoo28/shnootalk-playground-server:0.0.1
           ports:
             - containerPort: 8000
           resources:
