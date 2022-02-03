@@ -1,0 +1,412 @@
+/* 
+    Box - Quick dirty pico CSS framework
+
+    Copyright 2021 Vishnu Shankar B
+
+    Permission is hereby granted, free of charge, to any person obtaining a 
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation 
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the 
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included 
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+    OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+    USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/* CSS Variables */
+
+:root {
+    --accent-color: #ff1a1a;
+    --background-1e: #1e1e1e;
+    --background-25: #252526;
+    --background-2d: #2d2d2d;
+    --background-33: #333333;
+    --background-3c: #3c3c3c;
+    --foreground-f80: #ffffff80;
+    --foreground-cc: #cccccc;
+    --foreground-active: #ffffff;
+    --border-color: #373737;
+    --hover-background: rgba(50, 50, 50, 50);
+    --loader-color: #2d2d2d;
+}
+
+/* Default overrides */
+
+body {
+    font-family: monospace, monospace;
+}
+
+img {
+    padding: 0px;
+    vertical-align: middle;
+}
+
+span,
+input {
+    font: inherit;
+    font-size: inherit;
+}
+
+textarea,
+input[type="text"] {
+    border: none;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    resize: none;
+    font: inherit;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+input:focus {
+    border: 0.5px solid var(--accent-color);
+}
+
+/* Containers */
+
+.box-root {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .box span {
+        font-size: 14px;
+    }
+}
+
+.box-button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+.box-modal-background {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.box-modal-window {
+    margin: auto;
+}
+
+.box-display-none {
+    display: none;
+}
+
+/* Box container modifiers */
+
+.box-arrange-hor {
+    flex-direction: row;
+}
+
+.box-arrange-vert {
+    flex-direction: column;
+}
+
+.box-items-center {
+    align-items: center;
+}
+
+.box-content-center {
+    justify-content: center;
+}
+
+.box-arrange-gap {
+    gap: 2px;
+}
+
+.box-overflow-hidden {
+    overflow: hidden;
+}
+
+.box-rounded {
+    border-radius: 2px;
+}
+
+.box-display-none {
+    display: none;
+}
+
+.font-small {
+    font-size: small;
+}
+
+.font-x-large {
+    font-size: x-large;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-no-wrap {
+    white-space: nowrap;
+}
+
+.text-overflow-ellipses {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Box child modifiers */
+
+.box-child-grow {
+    flex-grow: 1;
+}
+
+.box-child-float-right {
+    margin-left: auto;
+}
+
+/* Box child width modifiers */
+
+.box-width-full {
+    width: 100%;
+}
+
+.box-width-half {
+    width: 50%;
+}
+
+.box-width-quarter {
+    width: 25%;
+}
+
+.box-width-35 {
+    width: 35%;
+}
+
+/* Box child height modifiers */
+
+.box-height-full {
+    height: 100%;
+}
+
+.box-height-half {
+    height: 50%;
+}
+
+.box-height-quarter {
+    height: 25%;
+}
+
+.box-height-35 {
+    height: 35%;
+}
+
+/* Padding */
+
+.pad-vert {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.pad-hor {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.pad-left {
+    padding-left: 12px;
+}
+
+.pad-right {
+    padding-right: 12px;
+}
+
+.pad-top {
+    padding-top: 12px;
+}
+
+.pad-bottom {
+    padding-bottom: 12px;
+}
+
+/* Small padding */
+
+.pad-vert-small {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.pad-hor-small {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.pad-left-small {
+    padding-left: 7px;
+}
+
+.pad-right-small {
+    padding-right: 7px;
+}
+
+.pad-top-small {
+    padding-top: 7px;
+}
+
+.pad-bottom-small {
+    padding-bottom: 7px;
+}
+
+/* Borders */
+
+.border-37 {
+    border: solid 1px var(--border-color);
+}
+
+.border-top-37 {
+    border-top: solid 1px var(--border-color);
+}
+
+.border-left-37 {
+    border-left: solid 1px var(--border-color);
+}
+
+.border-right-37 {
+    border-right: solid 1px var(--border-color);
+}
+
+.border-bottom-37 {
+    border-bottom: solid 1px var(--border-color);
+}
+
+/* Backgrounds */
+.background-1e,
+.hover-background-1e:hover:not(.active),
+.active-background-1e.active {
+    background: var(--background-1e);
+}
+
+.background-25,
+.hover-background-25:hover:not(.active),
+.active-background-25.active {
+    background: var(--background-25);
+}
+
+.background-2d,
+.hover-background-2d:hover:not(.active),
+.active-background-2d.active {
+    background: var(--background-2d);
+}
+
+.background-33,
+.hover-background-33:hover:not(.active),
+.active-background-33.active {
+    background: var(--background-33);
+}
+
+.background-3c,
+.hover-background-3c:hover:not(.active),
+.active-background-3c.active {
+    background: var(--background-3c);
+}
+
+.hover-background:hover:not(.active) {
+    background: var(--hover-background);
+}
+
+/* Foregrounds */
+
+.active-foreground-f80.active,
+.placeholder-foreground-f80::placeholder,
+.foreground-f80 {
+    color: var(--foreground-f80);
+}
+
+.active-foreground-cc.active,
+.placeholder-foreground-cc::placeholder,
+.foreground-cc {
+    color: var(--foreground-cc);
+}
+
+.active-foreground-active.active,
+.placeholder-foreground-active::placeholder,
+.foreground-active {
+    color: var(--foreground-active);
+}
+
+/* Scrollbar */
+.scroll-y {
+    overflow-y: scroll;
+}
+
+.scroll-x {
+    overflow-x: scroll;
+}
+
+.scroll-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Loader */
+
+.loader {
+    border-radius: 50%;
+    -webkit-animation: spin 0.6s linear infinite; /* Safari */
+    animation: spin 0.6s linear infinite;
+    border: 8px solid var(--background-2d);
+    border-top: 8px solid var(--foreground-f80);
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
