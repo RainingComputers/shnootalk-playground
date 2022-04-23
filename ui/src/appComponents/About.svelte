@@ -13,14 +13,6 @@
         </a>
 
         <a
-            href="https://github.com/RainingComputers/shnootalk-cloud-compile"
-            class="foreground-cc text-no-wrap"
-            target="_blank"
-        >
-            github.com/RainingComputers/shnootalk-cloud-compile
-        </a>
-
-        <a
             href="https://github.com/RainingComputers/shnootalk-playground"
             class="foreground-cc text-no-wrap"
             target="_blank"
