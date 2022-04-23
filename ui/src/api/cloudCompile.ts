@@ -47,7 +47,7 @@ export async function makeCompileRequest(programs: {
 }): Promise<CompileResponse> {
     try {
         if (!validateFileNames(programs)) return INVALID_FILE_NAMES
-        
+
         const response = await makeRequest(SERVER_URL, "post", programs)
 
         if (response.result === CompileResult.EXEC_TIMEDOUT) return TIMED_OUT
