@@ -2,7 +2,6 @@ import { makeRequest } from "./request"
 
 const SERVER_URL =
     "https://shnooapps.loophole.site/shnootalk-playground/api/v2/compile"
-const MESSAGE_500 = "Something went wrong, please try again later"
 
 export enum CompileResult {
     EXEC_TIMEDOUT = "EXEC_TIMEDOUT",
@@ -19,7 +18,7 @@ interface CompileResponse {
 }
 
 const SOMETHING_WENT_WRONG: CompileResponse = {
-    output: MESSAGE_500,
+    output: "Something went wrong, please try again later",
     result: CompileResult.COMPILE_FAILED,
 }
 
