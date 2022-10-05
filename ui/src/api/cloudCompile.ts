@@ -22,7 +22,7 @@ const SOMETHING_WENT_WRONG: CompileResponse = {
 }
 
 const TIMED_OUT: CompileResponse = {
-    output: "Execution has timed out",
+    output: "Execution has timed out or the server is overloaded",
     result: CompileResult.EXEC_TIMEDOUT,
 }
 
@@ -48,7 +48,11 @@ export async function makeCompileRequest(programs: {
 
         const response = await makeRequest(SERVER_URL, "post", programs)
 
-        if (response.result === CompileResult.EXEC_TIMEDOUT) return TIMED_OUT
+        if (
+            response.result === CompileResult.EXEC_TIMEDOUT ||
+            response.request === CompileResult.CLANG_LINK_TIMEDOUT
+        )
+            return TIMED_OUT
 
         return response
     } catch {
