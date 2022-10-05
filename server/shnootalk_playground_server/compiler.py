@@ -6,7 +6,7 @@ import os
 import glob
 
 C_COMPILER = 'g++'
-SHNOOTALK_COMPILER = 'shtkc'
+SHNOOTALK_COMPILER = '/usr/local/bin/shtkc'
 
 
 class Result(str, Enum):
@@ -49,7 +49,7 @@ def run_program(
         return Result.COMPILE_FAILED, compiler_output
 
     # Link object file into an executable
-    object_files = glob.glob(os.path.join(work_dir, "*.o"))
+    object_files = glob.glob(os.path.join(work_dir, '_obj', "*.o"))
     output_exec = os.path.join(work_dir, 'prog')
     link_command = [C_COMPILER] + object_files + ['-o', output_exec, '-lm']
     timedout, clang_output, clang_retcode = run_subprocess(link_command)

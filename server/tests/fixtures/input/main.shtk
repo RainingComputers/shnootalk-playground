@@ -1,8 +1,12 @@
+extfn getchar() -> char
+
 fn main() -> int
 {
-    var a: char[20]
-    input(a)
-    println(a)
+    print(getchar())
+    print(getchar())
+    print(getchar())
+    print(getchar())
+    print(getchar())
 
     return 0
 }

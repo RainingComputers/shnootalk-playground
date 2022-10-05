@@ -33,7 +33,7 @@ expected_outputs_list = [
     "main.shtk:(.text+0x2): undefined reference to `doesNotExist'\n"
     "clang: error: linker command failed with exit code 1 (use -v to see invocation)\n",
 
-    'Hello\n',
+    'Hello',
 
     None
 ]
