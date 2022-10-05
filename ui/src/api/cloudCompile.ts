@@ -1,7 +1,6 @@
 import { makeRequest } from "./request"
 
-const SERVER_URL =
-    "https://shnoo.loophole.site/shnootalk-playground/api/v2/compile"
+const SERVER_URL = "https://shnootalk.cc/shnootalk-playground/api/v2/compile"
 
 export enum CompileResult {
     EXEC_TIMEDOUT = "EXEC_TIMEDOUT",
