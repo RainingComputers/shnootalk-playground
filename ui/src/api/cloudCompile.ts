@@ -50,7 +50,7 @@ export async function makeCompileRequest(programs: {
 
         if (
             response.result === CompileResult.EXEC_TIMEDOUT ||
-            response.request === CompileResult.CLANG_LINK_TIMEDOUT
+            response.result === CompileResult.CLANG_LINK_TIMEDOUT
         )
             return TIMED_OUT
 
