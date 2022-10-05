@@ -4,10 +4,6 @@ from enum import Enum
 import subprocess
 import os
 import glob
-import shutil
-
-from shnootalk_playground_server.dirctx import dirctx
-
 
 C_COMPILER = 'g++'
 SHNOOTALK_COMPILER = 'shtkc'
@@ -24,10 +20,11 @@ class Result(str, Enum):
 
 def run_subprocess(command: List[str],
                    input_str: str = '',
+                   cwd: Optional[str] = None,
                    timeout: int = 5) -> Tuple[bool, Optional[str], Optional[int]]:
     try:
         subp = subprocess.run(command, capture_output=True, text=True,
-                              timeout=timeout, input=input_str)
+                              timeout=timeout, input=input_str, cwd=cwd)
 
     except subprocess.TimeoutExpired:
         return True, None, None
@@ -35,11 +32,13 @@ def run_subprocess(command: List[str],
     return False, subp.stdout+subp.stderr, subp.returncode
 
 
-def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, Optional[str]]:
+def run_program(
+    file_name: str, input_str: str, work_dir: str, timeout: int
+) -> Tuple[Result, Optional[str]]:
     # Run the compiler
     compile_command = [SHNOOTALK_COMPILER, file_name, '-c']
     timedout, compiler_output, compiler_retcode = run_subprocess(
-        compile_command, input_str, timeout
+        compile_command, input_str, work_dir, timeout
     )
 
     if timedout:
@@ -50,8 +49,9 @@ def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, O
         return Result.COMPILE_FAILED, compiler_output
 
     # Link object file into an executable
-    object_files = glob.glob("*.o")
-    link_command = [C_COMPILER] + object_files + ['-o', 'prog', '-lm']
+    object_files = glob.glob(os.path.join(work_dir, "*.o"))
+    output_exec = os.path.join(work_dir, 'prog')
+    link_command = [C_COMPILER] + object_files + ['-o', output_exec, '-lm']
     timedout, clang_output, clang_retcode = run_subprocess(link_command)
 
     if timedout:
@@ -62,7 +62,7 @@ def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, O
         return Result.CLANG_LINK_FAILED, clang_output
 
     # Run the executable and return the output from the executable
-    timedout, exec_output, _ = run_subprocess(['./prog'], input_str)
+    timedout, exec_output, _ = run_subprocess(['./prog'], input_str, cwd=work_dir)
 
     if timedout:
         return Result.EXEC_TIMEDOUT, None
@@ -71,8 +71,7 @@ def run_program(file_name: str, input_str: str, timeout: int) -> Tuple[Result, O
     return Result.SUCCESS, exec_output
 
 
-def compile_shnootalk(work_dir: str, timeout: int, prog_input: str = "") -> Tuple[Result, Optional[str]]:
-    with dirctx(work_dir):
-        result, output = run_program('main.shtk', prog_input, timeout)
-
-    return result, output
+def compile_shnootalk(
+    work_dir: str, timeout: int, prog_input: str = ""
+) -> Tuple[Result, Optional[str]]:
+    return run_program('main.shtk', prog_input, work_dir, timeout)

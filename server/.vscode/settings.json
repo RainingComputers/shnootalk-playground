@@ -5,7 +5,7 @@
     "python.linting.pycodestyleArgs": ["--max-line-length=120"],
     "python.linting.pylintCategorySeverity.convention": "Error",
     "python.linting.mypyEnabled": true,
-    "python.pythonPath": "./.venv/bin/python",
+    "python.defaultInterpreterPath": "./.venv/bin/python",
     "python.testing.pytestPath": "./.venv/bin/pytest",
     "cSpell.words": [
         "backoff",
@@ -27,9 +27,7 @@
         "subp",
         "uhll"
     ],
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
+    "python.testing.pytestArgs": ["tests"],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
 }

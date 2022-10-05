@@ -25,7 +25,9 @@ expected_outputs_list = [
     '\n'
     'fn main()\n'
     '   ^\n'
-    'Invalid return type for MAIN\n',
+    'Invalid return type for main\n'
+    '\n'
+    'main.shtk:1:3\n',
 
     "/usr/bin/ld: main.shtk.o: in function `main':\n"
     "main.shtk:(.text+0x2): undefined reference to `doesNotExist'\n"

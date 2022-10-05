@@ -32,14 +32,14 @@ def gen_work_dir(programs: Dict[str, str]) -> str:
         if file_name == "input":
             continue
 
-        with open(os.path.join(work_dir, file_name), "w") as file:
+        with open(os.path.join(work_dir, file_name), "w", encoding="utf-8") as file:
             file.write(content)
 
     return work_dir
 
 
 @app.post("/shnootalk-playground/api/v2/compile")
-def compile(programs: Dict[str, str]) -> Dict[str, Optional[str]]:
+def compile_files(programs: Dict[str, str]) -> Dict[str, Optional[str]]:
     if not validate(programs):
         raise HTTPException(
             HTTPStatus.BAD_REQUEST,

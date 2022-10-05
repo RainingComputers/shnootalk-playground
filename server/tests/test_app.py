@@ -1,7 +1,6 @@
 from typing import Any
 
 import pytest
-from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from shnootalk_playground_server.app import app
@@ -10,7 +9,7 @@ from shnootalk_playground_server.app import app
 def test_compile() -> None:
     client = TestClient(app)
     response = client.post(
-        "/api/v2/compile",
+        "/shnootalk-playground/api/v2/compile",
         json={"main.shtk": 'fn main() -> int { println("Hello world") return 0 }'}
     )
 
@@ -27,7 +26,7 @@ test_invalid_programs = [
 @pytest.mark.parametrize("test_programs", test_invalid_programs)
 def test_dispatch_invalid_schema(test_programs: Any) -> None:
     client = TestClient(app)
-    response = client.post("/api/v2/compile", json=test_programs)
+    response = client.post("/shnootalk-playground/api/v2/compile", json=test_programs)
 
     assert response.status_code == 400
     assert response.json() == {
