@@ -3,6 +3,7 @@ FROM ubuntu:latest
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get -y install tar g++ make findutils llvm-12 git python3 python3-pip
+RUN apt-get -y install curl
 
 RUN git clone https://github.com/RainingComputers/ShnooTalk
 RUN cd ShnooTalk; make build; make install

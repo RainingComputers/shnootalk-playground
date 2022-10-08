@@ -1,6 +1,6 @@
 APP_NAME = shnootalk_playground_server
 DOCKER_BASE_NAME = shnootalk-playground-server
-DOCKER_TAG_VERSION = 0.2.1
+DOCKER_TAG_VERSION = 0.2.2
 
 .PHONY: help push clean test lint  typechk push
 
