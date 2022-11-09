@@ -20,7 +20,7 @@
 </div>
 
 {#if loading}
-    <div class="box box-child-grow box-items-center box-width-full">
+    <div class="box box-items-center box-height-75 box-width-full">
         <Loading />
         <span class="pad-vert foreground-f80 font-small"> Compiling </span>
     </div>

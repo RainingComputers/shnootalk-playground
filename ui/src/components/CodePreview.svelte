@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
     const codePreviewClass = [
         "box",
-        "box-child-grow",
+        "box-height-75",
         "pad-hor",
         "scroll-x",
         "scroll-y",
@@ -14,7 +14,7 @@
 </script>
 
 <pre class={codePreviewClass}>
-    <code class="box box-child-grow foreground-cc">
-        {output}
+    <code class="foreground-cc">
+{output}
     </code>
 </pre>
