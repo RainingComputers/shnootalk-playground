@@ -12,6 +12,8 @@
 </script>
 
 <script lang="ts">
+    import Play from "./icons/Play.svelte"
+
     export let onClick: any
     export let disabled: boolean = false
     export let expandWidth: boolean = false
@@ -24,13 +26,16 @@
     on:click={onClick}
     {disabled}
 >
-    <img src="icons/play.svg" width="{iconWidth}px" alt="" />
+    <span class="box box-items-center" style="width: {iconWidth}px">
+        <Play />
+    </span>
     <span class="pad-left-small foreground-active">Run</span>
 </button>
 
 <style>
     button {
         background: #059862;
+        stroke: white;
     }
 
     button[disabled] {

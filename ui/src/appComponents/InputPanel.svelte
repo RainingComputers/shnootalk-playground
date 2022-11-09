@@ -10,6 +10,7 @@
 
 <script lang="ts">
     import IconAndLabel from "../components/IconAndLabel.svelte"
+    import Terminal from "../components/icons/Terminal.svelte"
 
     let textArea: HTMLTextAreaElement
 
@@ -19,7 +20,9 @@
 </script>
 
 <div class="box box-width-full border-top-37 box-height-quarter">
-    <IconAndLabel icon="icons/terminal.svg" label="INPUT" />
+    <IconAndLabel label="INPUT">
+        <Terminal />
+    </IconAndLabel>
     <textarea
         class={textAreaClass}
         placeholder="Enter input here"

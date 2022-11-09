@@ -1,24 +1,16 @@
-<script context="module" lang="ts">
-    const labelClass = [
-        "pad-hor",
-        "pad-vert",
-        "box-width-full",
-        "foreground-cc",
-        "font-small",
-        "box-child-grow",
-    ].join(" ")
-</script>
-
 <script lang="ts">
-    export let icon: string
     export let iconWidth: number = 16
     export let label: string
 </script>
 
-<div class="box box-arrange-hor">
-    <img src={icon} class="pad-left" width="{iconWidth}px" alt="" />
-    <span class={labelClass}>
+<div class="box box-arrange-hor box-items-center">
+    <span
+        class="box box-items-center pad-left foreground-f80"
+        style="width: {iconWidth}px;"
+    >
+        <slot />
+    </span>
+    <span class=" pad-hor pad-vert foreground-cc font-small">
         {label}
     </span>
-    <slot />
 </div>
