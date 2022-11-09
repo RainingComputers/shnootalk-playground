@@ -1,12 +1,10 @@
-FROM ubuntu:latest
+FROM debian:latest
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get -y install tar g++ make findutils llvm-12 git python3 python3-pip
-RUN apt-get -y install curl
+RUN apt-get -y install tar g++ make findutils git python3 python3-pip curl
 
-RUN git clone https://github.com/RainingComputers/ShnooTalk
-RUN cd ShnooTalk; make build; make install
+RUN curl -sf -L https://raw.githubusercontent.com/RainingComputers/ShnooTalk/main/install.sh | sh
 
 COPY ./shnootalk_playground_server ./shnootalk_playground_server
 COPY ./Pipfile .
