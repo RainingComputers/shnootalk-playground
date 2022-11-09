@@ -54,6 +54,7 @@ span,
 input {
     font: inherit;
     font-size: inherit;
+    outline: none;
 }
 
 textarea,
@@ -230,6 +231,10 @@ input:focus {
 
 .box-height-35 {
     height: 35%;
+}
+
+.box-height-75 {
+    height: 75%;
 }
 
 /* Padding */
