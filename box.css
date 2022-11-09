@@ -351,18 +351,21 @@ input:focus {
 .placeholder-foreground-f80::placeholder,
 .foreground-f80 {
     color: var(--foreground-f80);
+    stroke: var(--foreground-f80);
 }
 
 .active-foreground-cc.active,
 .placeholder-foreground-cc::placeholder,
 .foreground-cc {
     color: var(--foreground-cc);
+    stroke: var(--foreground-cc);
 }
 
 .active-foreground-active.active,
 .placeholder-foreground-active::placeholder,
 .foreground-active {
     color: var(--foreground-active);
+    stroke: var(--foreground-active);
 }
 
 /* Scrollbar */
