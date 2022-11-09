@@ -21,7 +21,7 @@ def validate_keys(programs: Dict[str, str]) -> bool:
             continue
 
         # Make sure keys match the pattern <file-name>.shtk,
-        # no sub directores, letters only
+        # no sub directories, letters only
         match = file_name_regex.match(key)
 
         if match is None:

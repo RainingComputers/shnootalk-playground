@@ -32,6 +32,12 @@ def run_subprocess(command: List[str],
     return False, subp.stdout+subp.stderr, subp.returncode
 
 
+def get_link_command(work_dir: str) -> List[str]:
+    object_files = glob.glob(os.path.join(work_dir, '_obj', "*.o"))
+    output_exec = os.path.join(work_dir, 'prog')
+    return [C_COMPILER] + object_files + ['-o', output_exec, '-lm']
+
+
 def run_program(
     file_name: str, input_str: str, work_dir: str, timeout: int
 ) -> Tuple[Result, Optional[str]]:
@@ -49,9 +55,7 @@ def run_program(
         return Result.COMPILE_FAILED, compiler_output
 
     # Link object file into an executable
-    object_files = glob.glob(os.path.join(work_dir, '_obj', "*.o"))
-    output_exec = os.path.join(work_dir, 'prog')
-    link_command = [C_COMPILER] + object_files + ['-o', output_exec, '-lm']
+    link_command = get_link_command(work_dir)
     timedout, clang_output, clang_retcode = run_subprocess(link_command)
 
     if timedout:
