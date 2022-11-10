@@ -2,7 +2,7 @@ FROM debian:latest
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get -y install tar g++ make findutils git python3 python3-pip curl
+RUN apt-get -y install tar g++ make findutils git python3 python3-pip curl libbsd0
 
 RUN curl -sf -L https://raw.githubusercontent.com/RainingComputers/ShnooTalk/main/install.sh | sh
 

@@ -35,7 +35,7 @@ def run_subprocess(command: List[str],
 def get_link_command(work_dir: str) -> List[str]:
     object_files = glob.glob(os.path.join(work_dir, '_obj', "*.o"))
     output_exec = os.path.join(work_dir, 'prog')
-    return [C_COMPILER] + object_files + ['-o', output_exec, '-lm']
+    return [C_COMPILER] + object_files + ['-o', output_exec, '-lm', '-lbsd']
 
 
 def run_program(
