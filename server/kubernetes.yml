@@ -5,7 +5,7 @@ metadata:
   labels:
     app: shnootalk-playground-server
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: shnootalk-playground-server
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: shnootalk-playground-server
-          image: docker.io/shnoo28/shnootalk-playground-server:0.3.5
+          image: docker.io/shnoo28/shnootalk-playground-server:0.3.6
           ports:
             - containerPort: 8000
           resources:
@@ -83,7 +83,7 @@ metadata:
   name: shnootalk-playground-ingress
   annotations:
     cert-manager.io/issuer: shnootalk-playground
-    ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   tls:
     - hosts:
